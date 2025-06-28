@@ -1,0 +1,431 @@
+:root {
+    --sakura-pink: #FFB7C5;
+    --sakura-pink-light: #FFD9E0;
+    --sakura-pink-dark: #FF97AA;
+    --white: #FFFFFF;
+    --light-gray: #F5F5F5;
+    --dark-gray: #333333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+@keyframes floatingSakura {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 183, 197, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 183, 197, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 183, 197, 0.5);
+    }
+}
+
+/* Heart burst effect */
+@keyframes heartBurst {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(20);
+        opacity: 0;
+    }
+}
+
+body {
+    background-color: var(--sakura-pink-light);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('images/sakura-bg.png');
+    background-size: 200px;
+    background-repeat: repeat;
+    animation: floatingSakura 60s linear infinite alternate;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 60%, var(--sakura-pink-light) 140%);
+    pointer-events: none;
+}
+
+.floating-petal {
+    position: fixed;
+    width: 15px;
+    height: 15px;
+    background-image: url('images/sakura-petal.png');
+    background-size: contain;
+    pointer-events: none;
+    z-index: 1;
+    animation: floatingPetal 15s linear infinite;
+}
+
+@keyframes floatingPetal {
+    0% {
+        transform: translateY(-5vh) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(105vh) rotate(720deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    z-index: 10;
+}
+
+/* Love Letter Styles */
+.love-letter-container {
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: pulseGlow 2s infinite;
+}
+
+.love-letter-container:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(255, 183, 197, 0.4);
+}
+
+.love-letter {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+    15% {
+        transform: scale(1.1);
+    }
+    30% {
+        transform: scale(1);
+    }
+    45% {
+        transform: scale(1.1);
+    }
+    60% {
+        transform: scale(1);
+    }
+}
+
+.love-letter-container p {
+    color: var(--sakura-pink-dark);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Card Deck Styles */
+.card-deck-container {
+    position: relative;
+    min-height: 500px;
+    perspective: 1000px;
+    padding: 20px;
+}
+
+.card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(50px) rotateX(10deg);
+    transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    top: 0;
+    left: 0;
+    padding-bottom: 80px; /* Add space for buttons */
+}
+
+.card.active {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    animation: cardGlow 3s infinite;
+}
+
+@keyframes cardGlow {
+    0% {
+        box-shadow: 0 10px 30px rgba(255, 183, 197, 0.3);
+    }
+    50% {
+        box-shadow: 0 15px 40px rgba(255, 183, 197, 0.7);
+    }
+    100% {
+        box-shadow: 0 10px 30px rgba(255, 183, 197, 0.3);
+    }
+}
+
+.card-img {
+    width: 90%;
+    height: 220px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 5px solid var(--sakura-pink);
+    transition: transform 0.5s ease;
+}
+
+.card-img:hover {
+    transform: scale(1.03);
+}
+
+.card-text {
+    text-align: center;
+    color: var(--dark-gray);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.card-title {
+    margin-bottom: 15px;
+    color: var(--sakura-pink-dark);
+    font-size: 24px;
+    position: relative;
+    display: inline-block;
+}
+
+.card-title::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--sakura-pink);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.card.active .card-title::after {
+    transform: scaleX(1);
+}
+
+/* Navigation Buttons */
+.navigation {
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+    right: 30px;
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 60px);
+}
+
+.nav-btn {
+    background-color: var(--sakura-pink);
+    color: var(--white);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+}
+
+.nav-btn:hover {
+    background-color: var(--sakura-pink-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.nav-btn:hover::before {
+    transform: translateX(0);
+}
+
+.prev-btn[style*="display: none"] + .next-btn {
+    margin-left: auto;
+}
+
+#next-btn {
+    /* This rule is no longer needed */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Cherry Blossom Background */
+.cherry-blossom {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes sway {
+    0%, 100% {
+        transform: translateX(-5px) rotate(0deg);
+    }
+    50% {
+        transform: translateX(5px) rotate(2deg);
+    }
+}
+
+.blossom-branch {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    animation: sway 5s ease-in-out infinite;
+}
+
+.blossom-branch img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.heart-burst {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.heart-particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--sakura-pink);
+    clip-path: path('M0,10 A10,10 0 0,1 10,0 A10,10 0 0,1 20,10 Q20,20 10,30 Q0,20 0,10');
+}
+
+/* Cherry Blossom Falling Animation */
+.floating-blossom {
+    position: fixed;
+    width: 25px;
+    height: 25px;
+    background-image: url('🌸');
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1;
+    animation: cherryBlossomFall 15s linear infinite;
+}
+
+.floating-blossom::before {
+    content: '🌸';
+    color: var(--sakura-pink);
+    filter: drop-shadow(0 0 3px rgba(255, 183, 197, 0.7));
+}
+
+@keyframes cherryBlossomFall {
+    0% {
+        transform: translateY(0) rotate(0deg) translateX(0);
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(25vh) rotate(90deg) translateX(15px);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(50vh) rotate(180deg) translateX(-10px);
+        opacity: 1;
+    }
+    75% {
+        transform: translateY(75vh) rotate(270deg) translateX(20px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg) translateX(-15px);
+        opacity: 0.7;
+    }
+}
+
+/* Heart Burst Effect */
+.heart-burst-container {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+    width: 1px;
+    height: 1px;
+}
+
+.heart-particle {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: var(--sakura-pink);
+    clip-path: path('M12,21.35l-1.45-1.32C5.4,15.36,2,12.28,2,8.5 C2,5.42,4.42,3,7.5,3c1.74,0,3.41,0.81,4.5,2.09C13.09,3.81,14.76,3,16.5,3 C19.58,3,22,5.42,22,8.5c0,3.78-3.4,6.86-8.55,11.54L12,21.35z');
+    animation: heartBurstOut 1.5s ease-out forwards;
+    transform-origin: center;
+}
+
+@keyframes heartBurstOut {
+    0% {
+        opacity: 1;
+        transform: rotate(var(--angle)) translateY(0) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: rotate(var(--angle)) translateY(-80px) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(var(--angle)) translateY(-150px) scale(0.3);
+    }
+}
